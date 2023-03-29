@@ -1,0 +1,12 @@
+{
+    
+    "require": {
+        "tecnickcom/tcpdf": "^6.6"
+    },
+    "autoload": {
+        
+        "psr-4": {
+            "Class\\": "blog/Class"
+        }
+    }
+}
