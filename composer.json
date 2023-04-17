@@ -1,7 +1,8 @@
 {
     
     "require": {
-        "tecnickcom/tcpdf": "^6.6"
+        "bayfrontmedia/php-time-helpers": "^2.0",
+        "linna/csrf-guard": "^2.0"
     },
     "autoload": {
         

@@ -15,7 +15,7 @@ public function __construct(int $id, string $name, string $content, ?int $date)
         $this->date = $date;
     }
 
-public function getResume() {
+public function getResume():?string {
     return substr($this->content, 0 , 70);
 }
 

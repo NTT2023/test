@@ -1,6 +1,9 @@
 <?php require_once('header.php'); ?>
+<?php require '../vendor/autoload.php'; ?>
 <?php
 use Class\Post;
+use Class\Note;
+use Bayfront\TimeHelpers\Time;
 $error = null;
 try {
     if (isset($_POST['name'], $_POST['content'])) {
@@ -31,9 +34,10 @@ try {
         <div class="container">
             <a href='edit.php?id=<?php echo $objPost->id; ?>'> <?php echo $objPost->name; ?></a>
             <span class="small"><?php echo $objPost->getDate(); ?></span>
+            <span class="small"><?php echo Time::getDateTime($objPost->date); ?></span>
             <p>
             <?php echo nl2br($objPost->getResume()) ;?>
-            <a href="pdf.php?name=<?php echo urlencode($objPost->name) ?>&content=<?php echo urlencode($objPost->content) ?>" target="_blank">Voir en PDF</a>
+            <?php echo Time::getReadTime($objPost->content); ?>
             </p>
             
         </div>
@@ -55,4 +59,37 @@ if($auth->isConnect()) : ?>
     </form>
 </div>
 <?php endif; ?>
+<?php 
+function Joli($tabs) {
+    $html = '';
+    foreach ($tabs as $tab) {
+        $html.= '<div class="container"><li>'. $tab->nom. ' a eu à l\'épreuve ';
+        $html.= ''. $tab->epreuve. ' la note de';
+        $html.= ' '. $tab->note. '</li></div><br>';
+
+    }
+    return $html;
+}
+$notes = (new Note());
+?>
+<h2>Toute les Notes ordonnées</h2>
+<?php 
+$json = $notes->getNotesOrder();
+echo Joli($json);
+?>
+
+<h2>Seulement U5</h2>
+<?php 
+$json = $notes->getBon('U5');
+echo Joli($json);
+ ?>
+ <h2>Seulement U5 order</h2>
+
+<?php 
+$json = $notes->getBonOrder('U5');
+echo Joli($json);
+ ?>
+
+?>
+
 <?php require_once 'footer.php'; ?>

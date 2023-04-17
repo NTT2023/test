@@ -4,79 +4,159 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "007a56ce5d77eeb623b8cae82ac92f7f",
+    "content-hash": "285622444635d188c2045a187358abb5",
     "packages": [
         {
-            "name": "tecnickcom/tcpdf",
-            "version": "6.6.2",
+            "name": "bayfrontmedia/php-array-helpers",
+            "version": "v2.0.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/tecnickcom/TCPDF.git",
-                "reference": "e3cffc9bcbc76e89e167e9eb0bbda0cab7518459"
+                "url": "https://github.com/bayfrontmedia/php-array-helpers.git",
+                "reference": "3aac6208e08cbdef3c65fae5c08d1e3cf68f35bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/e3cffc9bcbc76e89e167e9eb0bbda0cab7518459",
-                "reference": "e3cffc9bcbc76e89e167e9eb0bbda0cab7518459",
+                "url": "https://api.github.com/repos/bayfrontmedia/php-array-helpers/zipball/3aac6208e08cbdef3c65fae5c08d1e3cf68f35bc",
+                "reference": "3aac6208e08cbdef3c65fae5c08d1e3cf68f35bc",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": "^8.0"
             },
             "type": "library",
             "autoload": {
-                "classmap": [
-                    "config",
-                    "include",
-                    "tcpdf.php",
-                    "tcpdf_parser.php",
-                    "tcpdf_import.php",
-                    "tcpdf_barcodes_1d.php",
-                    "tcpdf_barcodes_2d.php",
-                    "include/tcpdf_colors.php",
-                    "include/tcpdf_filters.php",
-                    "include/tcpdf_font_data.php",
-                    "include/tcpdf_fonts.php",
-                    "include/tcpdf_images.php",
-                    "include/tcpdf_static.php",
-                    "include/barcodes/datamatrix.php",
-                    "include/barcodes/pdf417.php",
-                    "include/barcodes/qrcode.php"
-                ]
+                "psr-4": {
+                    "Bayfront\\ArrayHelpers\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "LGPL-3.0-only"
+                "MIT"
             ],
             "authors": [
                 {
-                    "name": "Nicola Asuni",
-                    "email": "info@tecnick.com",
-                    "role": "lead"
+                    "name": "John Robinson",
+                    "email": "john@bayfrontmedia.com",
+                    "homepage": "https://www.bayfrontmedia.com"
                 }
             ],
-            "description": "TCPDF is a PHP class for generating PDF documents and barcodes.",
-            "homepage": "http://www.tcpdf.org/",
+            "description": "Helper class to provide useful array functions.",
+            "homepage": "https://github.com/bayfrontmedia/php-array-helpers",
             "keywords": [
-                "PDFD32000-2008",
-                "TCPDF",
-                "barcodes",
-                "datamatrix",
-                "pdf",
-                "pdf417",
-                "qrcode"
+                "array",
+                "function",
+                "helper",
+                "helpers",
+                "php"
             ],
             "support": {
-                "issues": "https://github.com/tecnickcom/TCPDF/issues",
-                "source": "https://github.com/tecnickcom/TCPDF/tree/6.6.2"
+                "issues": "https://github.com/bayfrontmedia/php-array-helpers/issues",
+                "source": "https://github.com/bayfrontmedia/php-array-helpers/tree/v2.0.1"
             },
-            "funding": [
+            "time": "2023-02-03T19:15:28+00:00"
+        },
+        {
+            "name": "bayfrontmedia/php-time-helpers",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bayfrontmedia/php-time-helpers.git",
+                "reference": "830f6d8b8a6670ef33596435e17d9fb71b37c2e1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bayfrontmedia/php-time-helpers/zipball/830f6d8b8a6670ef33596435e17d9fb71b37c2e1",
+                "reference": "830f6d8b8a6670ef33596435e17d9fb71b37c2e1",
+                "shasum": ""
+            },
+            "require": {
+                "bayfrontmedia/php-array-helpers": "^2.0",
+                "php": "^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Bayfront\\TimeHelpers\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
                 {
-                    "url": "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&currency_code=GBP&business=paypal@tecnick.com&item_name=donation%20for%20tcpdf%20project",
-                    "type": "custom"
+                    "name": "John Robinson",
+                    "email": "john@bayfrontmedia.com",
+                    "homepage": "https://www.bayfrontmedia.com"
                 }
             ],
-            "time": "2022-12-17T10:28:59+00:00"
+            "description": "Helper class to provide useful time related functions.",
+            "homepage": "https://github.com/bayfrontmedia/php-time-helpers",
+            "keywords": [
+                "date",
+                "datetime",
+                "elapsed",
+                "human",
+                "php",
+                "time"
+            ],
+            "support": {
+                "issues": "https://github.com/bayfrontmedia/php-time-helpers/issues",
+                "source": "https://github.com/bayfrontmedia/php-time-helpers/tree/v2.0.0"
+            },
+            "time": "2023-01-26T17:10:26+00:00"
+        },
+        {
+            "name": "linna/csrf-guard",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/linna/csrf-guard.git",
+                "reference": "58c95e833e96ff25b88735d471a779d6cb058311"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/linna/csrf-guard/zipball/58c95e833e96ff25b88735d471a779d6cb058311",
+                "reference": "58c95e833e96ff25b88735d471a779d6cb058311",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1"
+            },
+            "require-dev": {
+                "infection/infection": ">=0.26",
+                "phpstan/phpstan": "^1.9",
+                "phpunit/phpunit": "^10"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Linna\\": "src/Linna/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Rapetti",
+                    "email": "sebastian.rapetti@tim.it"
+                }
+            ],
+            "description": "Linna Cross-site request forgery Guard",
+            "homepage": "https://github.com/linna/csrf-guard",
+            "keywords": [
+                "csrf",
+                "csrf-guard",
+                "php",
+                "surf"
+            ],
+            "support": {
+                "issues": "https://github.com/linna/csrf-guard/issues",
+                "source": "https://github.com/linna/csrf-guard/tree/v2.0.0"
+            },
+            "time": "2023-02-11T08:46:37+00:00"
         }
     ],
     "packages-dev": [],
