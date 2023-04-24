@@ -1,16 +1,15 @@
 <?php
 
 namespace Class;
-
 use PDO;
+
 class Auth
 {
-
     public $pdo;
 
-    function __construct()
+    function __construct($pdo)
     {
-        $this->pdo = myPdo::Connect();
+        $this->pdo = $pdo;
     }
 
 

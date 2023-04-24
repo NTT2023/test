@@ -1,24 +1,14 @@
 <?php require_once('header.php'); ?>
-<?php require '../vendor/autoload.php'; ?>
 <?php
+
 use Class\Post;
 use Class\Note;
-use Bayfront\TimeHelpers\Time;
+
 $error = null;
 try {
-    if (isset($_POST['name'], $_POST['content'])) {
-        $query = $pdo->prepare('INSERT INTO post (name, content, date) VALUES (:name, :content, :date)');
-        $query->bindValue(':name',$_POST['name']);
-        $query->bindValue(':content',$_POST['content']);
-        $query->bindValue(':date',time());
-        //$query->execute([':date' => $_POST['name'], 'content' => $_POST['content'], 'date' => time()]);
-        $query->execute();
-        header('Location: edit.php?id=' . $pdo->lastInsertId());
-        exit();
-    }
 
     $query = $pdo->query('SELECT * from post');
-    $posts = $query->fetchAll();
+    $posts = $query->fetchAll(PDO::FETCH_CLASS, 'Class\Post');
 } catch (PDOException $e) {
     $error = $e->getMessage();
 }
@@ -29,67 +19,61 @@ try {
     <div class="alert alert-danger"><?php echo $error; ?></div>
 <?php else : ?>
     <!-- <?php echo '"', __NAMESPACE__, '"'; ?> -->
-    <?php foreach ($posts as $post) :  ?>
-        <?php $objPost = new Post($post->id, htmlentities($post->name), htmlentities($post->content), $post->date) ?>
+    <?php foreach ($posts as $objPost) :  ?>
         <div class="container">
             <a href='edit.php?id=<?php echo $objPost->id; ?>'> <?php echo $objPost->name; ?></a>
             <span class="small"><?php echo $objPost->getDate(); ?></span>
-            <span class="small"><?php echo Time::getDateTime($objPost->date); ?></span>
+
             <p>
-            <?php echo nl2br($objPost->getResume()) ;?>
-            <?php echo Time::getReadTime($objPost->content); ?>
+                <?php echo nl2br($objPost->getResume()); ?>
+            <div class="small text-center"><?php echo $objPost->getTime(); ?></div>
             </p>
-            
+
         </div>
     <?php endforeach ?>
 
 <?php endif ?>
 
-<?php 
-if($auth->isConnect()) : ?>
-<div class="container">
-    <form action="" method="post">
-        <div class="form-group">
-            <input type="text" class="form-control" name="name" value="" placeholder="Le titre du nouvelle article">
-        </div>
-        <div class="form-group">
-            <textarea name="content" id="" cols="30" rows="10" class="form-control" placeholder="Votre article"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Sauvegarder</button>
-    </form>
-</div>
+<?php
+if ($auth->isConnect()) : ?>
+    <div class="container">
+        <a class="btn btn-secondary btn-lg" href="create.php">Ajouter un article</a>
+    </div>
 <?php endif; ?>
-<?php 
-function Joli($tabs) {
+<?php
+function Joli($tabs)
+{
     $html = '';
     foreach ($tabs as $tab) {
-        $html.= '<div class="container"><li>'. $tab->nom. ' a eu à l\'épreuve ';
-        $html.= ''. $tab->epreuve. ' la note de';
-        $html.= ' '. $tab->note. '</li></div><br>';
-
+        $html .= '<div class="container small">- ' . $tab->nom . ' a eu à l\'épreuve ';
+        $html .= '' . $tab->epreuve . ' la note de';
+        $html .= ' ' . $tab->note . '</div>';
     }
     return $html;
 }
 $notes = (new Note());
 ?>
-<h2>Toute les Notes ordonnées</h2>
-<?php 
-$json = $notes->getNotesOrder();
-echo Joli($json);
-?>
+<hr>
 
-<h2>Seulement U5</h2>
-<?php 
-$json = $notes->getBon('U5');
-echo Joli($json);
- ?>
- <h2>Seulement U5 order</h2>
+<div class="container bg-secondary text-white text-center p-3">
 
-<?php 
-$json = $notes->getBonOrder('U5');
-echo Joli($json);
- ?>
+    <h4>Toute les Notes ordonnées</h4>
+    <?php
+    $json = $notes->getNotesOrder();
+    echo Joli($json);
+    ?>
 
-?>
+    <h4>Seulement U5</h4>
+    <?php
+    $json = $notes->getBon('U5');
+    echo Joli($json);
+    ?>
+    <h4>Seulement U5 order</h4>
 
+    <?php
+    $json = $notes->getBonOrder('U5');
+    echo Joli($json);
+    ?>
+    <!-- <script>alert("Les session ne sont pas conformes" + document.cookie );</script> -->
+</div>
 <?php require_once 'footer.php'; ?>

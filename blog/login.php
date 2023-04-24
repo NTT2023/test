@@ -2,19 +2,21 @@
 require_once('header.php'); ?>
 
 <?php
-$provider =  Linna\CsrfGuard\ProviderSimpleFactory::getProvider();
+
+use Linna;
+
+$provider =  linna\CsrfGuard\ProviderSimpleFactory::getProvider();
 
 use Class\Auth;
-
 
 $error = null;
 
 if (isset($_POST['username'], $_POST['mdp'])) {
-
+    //bidouille crsf car plusieur cookie sont passés
     $index = count($_SESSION['csrf_syncronizer_token']) - 1;
 
     if (($provider->validate($_POST['CSRF'])) && ($provider->validate(substr($_SESSION['csrf_syncronizer_token'][$index], 0, -8)))) {
-        $auth = new Auth();
+        $auth = new Auth($pdo);
         $user = $auth->login($_POST['username'], $_POST['mdp']);
         if ($user) :
             header('Location: index.php');
@@ -24,8 +26,6 @@ if (isset($_POST['username'], $_POST['mdp'])) {
         endif;
     } else {
         $error = "Mauvais CRCF !";
-        var_dump(substr($_SESSION['csrf_syncronizer_token'][$index], 0, -8));
-        var_dump($_POST['CSRF']);
     }
 }
 ?>
