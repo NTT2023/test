@@ -74,4 +74,12 @@ class AuthTest extends TestCase
         $this->session['User'] = 'bad';
         $this->assertNull($this->auth->isConnect());
     }
+    //test fonction logout()
+    public function testlogout()
+    {
+        $this->auth->login('toto', 'toto');
+        $this->auth->logout();
+        $this->assertEquals(false, isset($this->session['User']));
+        $this->assertNull($this->auth->isConnect());
+    }
 }
