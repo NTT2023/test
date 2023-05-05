@@ -16,7 +16,7 @@ if (isset($_POST['username'], $_POST['mdp'])) {
     $index = count($_SESSION['csrf_syncronizer_token']) - 1;
 
     if (($provider->validate($_POST['CSRF'])) && ($provider->validate(substr($_SESSION['csrf_syncronizer_token'][$index], 0, -8)))) {
-        $auth = new Auth($pdo);
+        $auth = new Auth($pdo, $_SESSION);
         $user = $auth->login($_POST['username'], $_POST['mdp']);
         if ($user) :
             header('Location: index.php');

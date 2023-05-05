@@ -19,6 +19,7 @@ try {
     $query = $pdo->prepare('SELECT * from post WHERE id= :id');
     $query->execute(['id' => $_GET['id']]);
     $count = $query->rowCount();
+    
     $post = $query->fetchObject('Class\Post');
 } catch (PDOException $e) {
     $error = $e->getMessage();

@@ -5,7 +5,7 @@ use Class\Auth;
 use Class\myPdo;
 
 $pdo = myPdo::Connect();
-$auth = new Auth($pdo);
+$auth = new Auth($pdo, $_SESSION);
 ?>
 <!DOCTYPE html>
 <html lang="fr">

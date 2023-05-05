@@ -9,5 +9,8 @@
         "psr-4": {
             "Class\\": "blog/Class"
         }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9"
     }
 }

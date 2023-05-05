@@ -5,18 +5,20 @@ use PDO;
 
 class Auth
 {
-    public $pdo;
+    private $pdo;
+    private $session;
 
-    function __construct($pdo)
+    function __construct(PDO $pdo, array &$session)
     {
         $this->pdo = $pdo;
+        $this->session = &$session;
     }
 
 
     public function isConnect(): ?User {
-        if(!isset($_SESSION['User'])) { return null;
+        if(!isset($this->session['User'])) { return null;
         exit(); }
-        $id = $_SESSION['User'];
+        $id = $this->session['User'];
         $query = $this->pdo->prepare('SELECT * FROM users WHERE id= :id');
         $query->execute(['id' => $id]);
         $query->setFetchMode(PDO::FETCH_CLASS, User::class);
@@ -44,7 +46,7 @@ class Auth
 
         //   if(password_verify($mdp, $user->mdp)) 
         if ($mdp == $user->mdp) {
-            $_SESSION['User'] = $user->id;
+            $this->session['User'] = $user->id;
             return $user;
         }
         return null;
