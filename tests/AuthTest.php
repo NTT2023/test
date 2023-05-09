@@ -3,6 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use Class\Auth;
 use Class\User;
+use Class\UriException;
 
 class AuthTest extends TestCase
 {
@@ -78,8 +79,35 @@ class AuthTest extends TestCase
     public function testlogout()
     {
         $this->auth->login('toto', 'toto');
+        $this->expectException(UriException::class);
         $this->auth->logout();
         $this->assertEquals(false, isset($this->session['User']));
         $this->assertNull($this->auth->isConnect());
+    }
+
+    //test fonction acces page admin()
+    public function testaccesPasConnect()
+    {
+        $this->expectException(UriException::class);
+        $this->auth->acces('/Labo/blog/create.php');
+    }
+
+    public function testaccesConnectPasBonRole()
+    {
+        $this->expectException(UriException::class);
+        $this->auth->login('toto', 'toto');
+        $this->auth->acces('/Labo/blog/create.php');
+    }
+
+    public function testaccesConnectBonRole()
+    {
+        $this->auth->login('admin', 'admin');
+        $this->assertNotFalse($this->auth->acces('/Labo/blog/create.php'));
+    }
+
+    //test fonction acces autre page
+    public function testaccesHorsProtection()
+    {
+        $this->assertNotFalse($this->auth->acces('/Labo/blog/index.php'));
     }
 }
